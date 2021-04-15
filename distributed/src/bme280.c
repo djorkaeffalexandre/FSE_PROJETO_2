@@ -1689,7 +1689,7 @@ struct bme280_data bme280_read() {
     rslt = bme280_start(&dev);
     if (rslt != BME280_OK) {
         fprintf(stderr, "Erro ao inicializar BME280.\n");
-        return -1;
+        exit(1);
     }
 
     return stream_sensor_data(&dev);
