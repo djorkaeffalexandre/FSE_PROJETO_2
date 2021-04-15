@@ -11,9 +11,9 @@
 #include <quit.h>
 #include <alarm.h>
 
-#define SERVER_DISTRIBUTED_IP "192.168.0.53"
-#define SERVER_DISTRIBUTED_PORT 10012
-#define SERVER_CENTRAL_PORT 10112
+#define SERVER_DISTRIBUTED_IP "192.168.0.52"
+#define SERVER_DISTRIBUTED_PORT 10112
+#define SERVER_CENTRAL_PORT 10012
 
 void* recv_message() {
   struct sockaddr_in server, client;
