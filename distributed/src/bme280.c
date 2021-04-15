@@ -1664,7 +1664,7 @@ struct bme280_data stream_sensor_data(struct bme280_dev *dev) {
 
     /* Espera 1 segundo para realizar a medição */
     dev->delay_us(100000, dev->intf_ptr);
-    rslt = bme280_get_sensor_data(BME280_TEMP, &data, dev);
+    rslt = bme280_get_sensor_data(BME280_TEMP | BME280_HUM, &data, dev);
     if (rslt != BME280_OK) {
         fprintf(stderr, "Erro ao ler dados do sensor BME280 (código: %+d).\n", rslt);
         exit(1);
