@@ -8,12 +8,55 @@
 #include <string.h>
 #include <sys/types.h>
 #include <fcntl.h>
+#include <quit.h>
+#include <alarm.h>
 
-#define SERVER_CENTRAL_IP "192.168.0.53"
-#define SERVER_CENTRAL_PORT 10012
+#define SERVER_DISTRIBUTED_IP "192.168.0.53"
+#define SERVER_DISTRIBUTED_PORT 10012
+#define SERVER_CENTRAL_PORT 10112
 
 void* recv_message() {
-  return NULL;
+  struct sockaddr_in server, client;
+
+	int serverid = socket(AF_INET, SOCK_STREAM, 0);
+
+	memset(&server, '0', sizeof(server));
+
+	server.sin_family = AF_INET;
+	server.sin_addr.s_addr = htonl(INADDR_ANY);
+	server.sin_port = htons(SERVER_CENTRAL_PORT);
+
+	bind(serverid, (struct sockaddr*) &server, sizeof(server));
+
+	if (listen(serverid, 10) == -1) {
+		printf("ERROR");
+		quit_handler();
+	}
+
+  while (1) {
+	  unsigned int len = sizeof(client);
+	  int clientid = accept(serverid, (struct sockaddr*) &client, &len);
+
+    char buffer[16];
+	  int size = recv(clientid, buffer, 16, 0);
+
+    if (size < 0) {
+      printf("ERROR");
+      quit_handler();
+    }
+    
+    buffer[15] = '\0';
+		
+		int command;
+		sscanf(buffer, "%d", &command);
+    if (command == 1) {
+      alarm_handler();
+    }
+		
+		close(clientid);
+  }
+
+	close(serverid);
 }
 
 void send_message(int item, int status) {
@@ -22,16 +65,16 @@ void send_message(int item, int status) {
   int socketid = socket(AF_INET, SOCK_STREAM, 0);
   if (socketid == -1) {
     printf("Could not create a socket!\n");
-    exit(1);
+    quit_handler();
   }
 
   client.sin_family = AF_INET;
-  client.sin_addr.s_addr = inet_addr(SERVER_CENTRAL_IP);
-  client.sin_port = htons(SERVER_CENTRAL_PORT);
+  client.sin_addr.s_addr = inet_addr(SERVER_DISTRIBUTED_IP);
+  client.sin_port = htons(SERVER_DISTRIBUTED_PORT);
 
   if (connect(socketid, (struct sockaddr*) &client, sizeof(client)) < 0) {
     printf("Error: Connection failed\n");
-    exit(1);
+    quit_handler();
   }
 
   char buf[4];
@@ -39,7 +82,7 @@ void send_message(int item, int status) {
   int size = strlen(buf);
   if (send(socketid, buf, size, 0) != size) {
 		printf("Error: Send failed\n");
-    exit(1);
+    quit_handler();
   }
 
   close(socketid);

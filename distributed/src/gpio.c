@@ -6,32 +6,31 @@ void gpio_init() {
 
 void toggle(int item, int status) {
   pinMode(item, OUTPUT);
-  softPwmCreate(item, 1, ON);
-  softPwmWrite(item, status);
+  digitalWrite(item, status);
 }
 
 void all_off() {
   // LAMP1
   pinMode(LAMP1, OUTPUT);
-  softPwmWrite(LAMP1, OFF);
+  digitalWrite(LAMP1, LOW);
 
   // LAMP2
   pinMode(LAMP2, OUTPUT);
-  softPwmWrite(LAMP2, OFF);
+  digitalWrite(LAMP2, LOW);
 
   // LAMP3
   pinMode(LAMP3, OUTPUT);
-  softPwmWrite(LAMP3, OFF);
+  digitalWrite(LAMP3, LOW);
 
   // LAMP4
   pinMode(LAMP4, OUTPUT);
-  softPwmWrite(LAMP4, OFF);
+  digitalWrite(LAMP4, LOW);
 
   // AC1
   pinMode(AC1, OUTPUT);
-  softPwmWrite(AC1, OFF);
+  digitalWrite(AC1, LOW);
 
   // AC2
   pinMode(AC2, OUTPUT);
-  softPwmWrite(AC2, OFF);
+  digitalWrite(AC2, LOW);
 }

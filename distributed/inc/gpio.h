@@ -2,9 +2,6 @@
 #include <stdio.h>    
 #include <softPwm.h>
 
-#define ON 100
-#define OFF 0
-
 // 17 -> 0 -> Lâmpada 01
 // 18 -> 1 -> Lâmpada 02
 // 27 -> 2 -> Lâmpada 03
