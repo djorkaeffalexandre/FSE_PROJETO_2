@@ -20,14 +20,19 @@ void state_init() {
   _state.ac1 = 0;
   _state.ac2 = 0;
   _state.alarm = 0;
+  _state.playing = 0;
 }
 
 void store_state_update(State state) {
+  if (state.alarm == 0) {
+    state.playing = 0;
+  }
+  
   Data data = current_data();
   data.state = state;
   print_data(data);
 
-  int res;
+  int res = 1;
   if (state.lamp1 != _state.lamp1) {
     res = send_command(LAMP1, state.lamp1);
   }

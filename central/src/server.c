@@ -48,10 +48,8 @@ void* recv_message() {
     
     buffer[15] = '\0';
 
-		
 		int command;
 		sscanf(buffer, "%d", &command);
-    printf("received: %d\n", command);
     if (command == 1) {
       alarm_handler();
     }

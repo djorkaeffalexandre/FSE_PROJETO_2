@@ -8,7 +8,7 @@
 #include "csv.h"
 
 #define WIDTH 50
-#define HEIGHT 15
+#define HEIGHT 17
 
 WINDOW *window;
 
@@ -90,6 +90,11 @@ void print_data(Data data) {
   mvwprintw(window, 11, 2, "TEMPERATURE: %4.2f", data.bme280.temperature);
   mvwprintw(window, 12, 2, "HUMIDITY: %4.2f", data.bme280.humidity);
 	wattroff(window, COLOR_PAIR(1));
+
+	wattron(window, COLOR_PAIR(data.state.playing == 1 ? 3 : 2));
+	mvwprintw(window, 14, 2, "ALARM PLAYING: %s", data.state.alarm == 1 ? "TRUE " : "FALSE");
+	wattroff(window, COLOR_PAIR(data.state.playing == 1 ? 3 : 2));
+
   wrefresh(window);
 }
 

@@ -12,7 +12,6 @@ void toggle(int item, int status) {
 }
 
 void handle(void) {
-  printf("handle\n");
   char* message = "1";
   server_send(message);
 }

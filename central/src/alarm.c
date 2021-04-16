@@ -7,9 +7,7 @@ void alarm_handler() {
 
   // Alarme acionado
   if (state.alarm == 1) {
-    printf("beep\n");
-    return;
+    state.playing = 1;
+    store_state_update(state);
   }
-
-  printf("nothing to do...");
 }

@@ -9,6 +9,7 @@ typedef struct {
   int ac1;
   int ac2;
   int alarm;
+  int playing;
 } State;
 
 void state_init();
