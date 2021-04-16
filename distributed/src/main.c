@@ -13,11 +13,13 @@ int main() {
 	quit_init();
 	bme280_init();
 
-	pthread_t server;
+	pthread_t server, gpio;
 
 	pthread_create(&server, NULL, server_handler, NULL);
+	pthread_create(&gpio, NULL, gpio_handler, NULL);
 
 	pthread_join(server, NULL);
+	pthread_join(gpio, NULL);
 	
 	return 0;
 }
