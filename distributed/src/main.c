@@ -9,6 +9,7 @@
 #include <bme280.h>
 
 int main() {
+	all_off();
 	gpio_init();
 	quit_init();
 	bme280_init();
