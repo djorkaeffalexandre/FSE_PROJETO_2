@@ -127,7 +127,7 @@ Bme280 request_sensor() {
   int command;
   double temperature;
   double humidity;
-  sscanf(buffer, "%d %f %f", &command, &temperature, &humidity);
+  sscanf(buffer, "%d %lf %lf", &command, &temperature, &humidity);
   Bme280 bme280;
   bme280.temperature = temperature;
   bme280.humidity = humidity;
