@@ -60,7 +60,7 @@ void* recv_message() {
 	close(serverid);
 }
 
-void send_command(int item, int status) {
+int send_command(int item, int status) {
   struct sockaddr_in client;
 
   int socketid = socket(AF_INET, SOCK_STREAM, 0);
@@ -86,7 +86,21 @@ void send_command(int item, int status) {
     quit_handler();
   }
 
+  char buffer[16];
+  int size_rec = recv(socketid, buffer, 16, 0);
+  if (size_rec < 0) {
+    printf("Error: Recv failed\n");
+    quit_handler();
+  }
+
+  buffer[15] = '\0';
+
+  int res;
+  sscanf(buffer, "%d", &res);
+
   close(socketid);
+
+  return res;
 }
 
 Bme280 request_sensor() {
@@ -118,7 +132,7 @@ Bme280 request_sensor() {
   char buffer[16];
   int size_rec = recv(socketid, buffer, 16, 0);
   if (size_rec < 0) {
-    printf("ERROR");
+    printf("Error: Recv failed\n");
     quit_handler();
   }
     

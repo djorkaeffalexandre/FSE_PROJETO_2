@@ -27,26 +27,29 @@ void store_state_update(State state) {
   data.state = state;
   print_data(data);
 
+  int res;
   if (state.lamp1 != _state.lamp1) {
-    send_command(LAMP1, state.lamp1);
+    res = send_command(LAMP1, state.lamp1);
   }
   if (state.lamp2 != _state.lamp2) {
-    send_command(LAMP2, state.lamp2);
+    res = send_command(LAMP2, state.lamp2);
   }
   if (state.lamp3 != _state.lamp3) {
-    send_command(LAMP3, state.lamp3);
+    res = send_command(LAMP3, state.lamp3);
   }
   if (state.lamp4 != _state.lamp4) {
-    send_command(LAMP4, state.lamp4);
+    res = send_command(LAMP4, state.lamp4);
   }
   if (state.ac1 != _state.ac1) {
-    send_command(AC1, state.ac1);
+    res = send_command(AC1, state.ac1);
   }
   if (state.ac2 != _state.ac2) {
-    send_command(AC2, state.ac2);
+    res = send_command(AC2, state.ac2);
   }
 
-  _state = state;
+  if (res == 1) {
+    _state = state;
+  }
 }
 
 State retrieve_state_data() {
