@@ -1,6 +1,8 @@
 #include "csv.h"
 
-char buffer[10];
+#define BUF_LEN 256
+
+char buffer[BUF_LEN];
 
 void time_generate() {
   time_t current_time;
@@ -9,7 +11,7 @@ void time_generate() {
   time(&current_time);
   time_info = localtime(&current_time);
 
-  strftime(buffer, 10, "%H:%M:%S", time_info);
+  strftime(buffer, BUF_LEN, "%c", time_info);
 }
 
 void csv_init() {
@@ -24,12 +26,15 @@ void write_data(Command command) {
 
   // Write file
   FILE *file = fopen("data.csv", "a");
+  char *on = "ON";
+  char *off = "OFF";
+  char *state = command.state == 1 ? "ON" : "OFF";
   fprintf(
     file,
-    "%s,%s,%d\r\n",
+    "%s,%s,%s\r\n",
     buffer,
     command.item,
-    command.state
+    state
   );
   fclose(file);
 }
