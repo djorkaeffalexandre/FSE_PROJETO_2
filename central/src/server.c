@@ -10,6 +10,7 @@
 #include <fcntl.h>
 #include <quit.h>
 #include <alarm.h>
+#include "server.h"
 
 #define SERVER_DISTRIBUTED_IP "192.168.0.52"
 #define SERVER_DISTRIBUTED_PORT 10112
@@ -86,4 +87,52 @@ void send_command(int item, int status) {
   }
 
   close(socketid);
+}
+
+Bme280 request_sensor() {
+  struct sockaddr_in client;
+
+  int socketid = socket(AF_INET, SOCK_STREAM, 0);
+  if (socketid == -1) {
+    printf("Could not create a socket!\n");
+    quit_handler();
+  }
+
+  client.sin_family = AF_INET;
+  client.sin_addr.s_addr = inet_addr(SERVER_DISTRIBUTED_IP);
+  client.sin_port = htons(SERVER_DISTRIBUTED_PORT);
+
+  if (connect(socketid, (struct sockaddr*) &client, sizeof(client)) < 0) {
+    printf("Error: Connection failed\n");
+    quit_handler();
+  }
+
+  char buf[2];
+  snprintf(buf, 2, "%d", 2);
+  int size = strlen(buf);
+  if (send(socketid, buf, size, 0) != size) {
+		printf("Error: Send failed\n");
+    quit_handler();
+  }
+
+  char buffer[16];
+  int size = recv(socketid, buffer, 16, 0);
+  if (size < 0) {
+    printf("ERROR");
+    quit_handler();
+  }
+    
+  buffer[15] = '\0';
+	
+  int command;
+  double temperature;
+  double humidity;
+  sscanf(buffer, "%d %4.2f %4.2f", &command, &temperature, &humidity);
+  Bme280 bme280;
+  bme280.temperature = temperature;
+  bme280.humidity = humidity;
+
+  close(socketid);
+
+  return bme280;
 }

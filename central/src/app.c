@@ -10,9 +10,7 @@
 
 void* app_handler() {
   while (1) {
-    Bme280 bme280;
-    bme280.temperature = 27.51;
-    bme280.humidity = 41.76;
+    Bme280 bme280 = request_sensor();
 
     Data data;
     data.bme280 = bme280;

@@ -55,6 +55,12 @@ void* server_handler() {
       int status;
       sscanf(buffer, "%d %d %d", &command, &item, &status);
       toggle(item, status);
+      char buf[2];
+      snprintf(buf, 2, "%d", 1);
+      int size = strlen(buf);
+      if (send(clientid, buf, size, 0) != size) {
+        printf("Error: Send failed\n");
+      }
     }
     // Leitura Sensor BME280
     if (command == 2) {
