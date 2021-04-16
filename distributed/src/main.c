@@ -6,6 +6,7 @@
 #include <server.h>
 #include <gpio.h>
 #include <quit.h>
+#include <bme280.h>
 
 int main() {
 	gpio_init();
