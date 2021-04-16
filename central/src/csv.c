@@ -26,8 +26,6 @@ void write_data(Command command) {
 
   // Write file
   FILE *file = fopen("data.csv", "a");
-  char *on = "ON";
-  char *off = "OFF";
   char *state = command.state == 1 ? "ON" : "OFF";
   fprintf(
     file,
