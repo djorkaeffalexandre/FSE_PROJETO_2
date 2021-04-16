@@ -7,6 +7,6 @@ typedef struct {
 } Bme280;
 
 void* recv_message();
-void send_message();
+void send_command(int item, int status);
 
 #endif /* SERVER_H_ */

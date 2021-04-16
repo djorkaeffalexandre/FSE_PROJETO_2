@@ -9,6 +9,7 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include <gpio.h>
+#include <bme280.h>
 
 #define SERVER_CENTRAL_IP "192.168.0.53"
 #define SERVER_CENTRAL_PORT 10012
@@ -46,10 +47,25 @@ void* server_handler() {
     
     buffer[15] = '\0';
 		
-		int item;
-		int status;
-		sscanf(buffer, "%d %d", &item, &status);
-		toggle(item, status);
+    int command;
+    sscanf(buffer, "%d", &command);
+    // Ligar/Desligar GPIO
+    if (command == 1) {
+      int item;
+      int status;
+      sscanf(buffer, "%d %d %d", &command, &item, &status);
+      toggle(item, status);
+    }
+    // Leitura Sensor BME280
+    if (command == 2) {
+      char buf[16];
+      struct bme280_data data = bme280_read();
+      snprintf(buf, 16, "%d %4.2f %4.2f", 2, data.temperature, data.humidity);
+      int size = strlen(buf);
+      if (send(clientid, buf, size, 0) != size) {
+        printf("Error: Send failed\n");
+      }
+    }
 		
 		close(clientid);
   }

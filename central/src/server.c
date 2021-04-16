@@ -59,7 +59,7 @@ void* recv_message() {
 	close(serverid);
 }
 
-void send_message(int item, int status) {
+void send_command(int item, int status) {
   struct sockaddr_in client;
 
   int socketid = socket(AF_INET, SOCK_STREAM, 0);
@@ -77,8 +77,8 @@ void send_message(int item, int status) {
     quit_handler();
   }
 
-  char buf[4];
-  snprintf(buf, 4, "%d %d", item, status);
+  char buf[6];
+  snprintf(buf, 6, "%d %d %d", 1, item, status);
   int size = strlen(buf);
   if (send(socketid, buf, size, 0) != size) {
 		printf("Error: Send failed\n");
