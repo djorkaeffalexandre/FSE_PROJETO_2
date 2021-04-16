@@ -116,8 +116,8 @@ Bme280 request_sensor() {
   }
 
   char buffer[16];
-  int size = recv(socketid, buffer, 16, 0);
-  if (size < 0) {
+  int size_rec = recv(socketid, buffer, 16, 0);
+  if (size_rec < 0) {
     printf("ERROR");
     quit_handler();
   }
@@ -127,7 +127,7 @@ Bme280 request_sensor() {
   int command;
   double temperature;
   double humidity;
-  sscanf(buffer, "%d %4.2f %4.2f", &command, &temperature, &humidity);
+  sscanf(buffer, "%d %f %f", &command, &temperature, &humidity);
   Bme280 bme280;
   bme280.temperature = temperature;
   bme280.humidity = humidity;
