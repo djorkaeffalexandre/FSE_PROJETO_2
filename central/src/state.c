@@ -1,5 +1,7 @@
 #include "state.h"
 #include <server.h>
+#include <menu.h>
+#include <app.h>
 
 #define LAMP1 0
 #define LAMP2 1
@@ -21,6 +23,10 @@ void state_init() {
 }
 
 void store_state_update(State state) {
+  Data data = current_data();
+  data.state = state;
+  print_data(data);
+
   if (state.lamp1 != _state.lamp1) {
     send_command(LAMP1, state.lamp1);
   }
@@ -39,6 +45,7 @@ void store_state_update(State state) {
   if (state.ac2 != _state.ac2) {
     send_command(AC2, state.ac2);
   }
+
   _state = state;
 }
 
