@@ -12,7 +12,6 @@ void toggle(int item, int status) {
 }
 
 void handle(void) {
-  printf("handle");
   char* message = "1";
   server_send(message);
 }
@@ -20,35 +19,35 @@ void handle(void) {
 void* gpio_handler() {
   // Sensor de Presença 01 (Sala)
   pinMode(PRES1, OUTPUT);
-  wiringPiISR(PRES1, INT_EDGE_BOTH, &handle);
+  wiringPiISR(PRES1, INT_EDGE_RISING, &handle);
 
   // Sensor de Presença 02 (Cozinha)
   pinMode(PRES2, OUTPUT);
-  wiringPiISR(PRES2, INT_EDGE_BOTH, &handle);
+  wiringPiISR(PRES2, INT_EDGE_RISING, &handle);
 
   // Sensor Abertura 01 (Porta Cozinha)
   pinMode(ABR1, OUTPUT);
-  wiringPiISR(ABR1, INT_EDGE_BOTH, &handle);
+  wiringPiISR(ABR1, INT_EDGE_RISING, &handle);
 
   // Sensor Abertura 02 (Janela Cozinha)
   pinMode(ABR2, OUTPUT);
-  wiringPiISR(ABR2, INT_EDGE_BOTH, &handle);
+  wiringPiISR(ABR2, INT_EDGE_RISING, &handle);
   
   // Sensor Abertura 03 (Porta Sala)
   pinMode(ABR3, OUTPUT);
-  wiringPiISR(ABR3, INT_EDGE_BOTH, &handle);
+  wiringPiISR(ABR3, INT_EDGE_RISING, &handle);
 
   // Sensor Abertura 04 (Janela Sala)
   pinMode(ABR4, OUTPUT);
-  wiringPiISR(ABR4, INT_EDGE_BOTH, &handle);
+  wiringPiISR(ABR4, INT_EDGE_RISING, &handle);
 
   // Sensor Abertura 05 (Janela Quarto 01)
   pinMode(ABR5, OUTPUT);
-  wiringPiISR(ABR5, INT_EDGE_BOTH, &handle);
+  wiringPiISR(ABR5, INT_EDGE_RISING, &handle);
 
   // Sensor Abertura 06 (Janela Quarto 02)
   pinMode(ABR6, OUTPUT);
-  wiringPiISR(ABR6, INT_EDGE_BOTH, &handle);
+  wiringPiISR(ABR6, INT_EDGE_RISING, &handle);
 
   for(;;) {
     sleep(1);
