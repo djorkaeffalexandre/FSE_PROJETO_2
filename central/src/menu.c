@@ -92,7 +92,7 @@ void print_data(Data data) {
 	wattroff(window, COLOR_PAIR(1));
 
 	wattron(window, COLOR_PAIR(data.state.playing == 1 ? 3 : 2));
-	mvwprintw(window, 14, 2, "ALARM PLAYING: %s", data.state.alarm == 1 ? "TRUE " : "FALSE");
+	mvwprintw(window, 14, 2, "ALARM PLAYING: %s", data.state.playing == 1 ? "TRUE " : "FALSE");
 	wattroff(window, COLOR_PAIR(data.state.playing == 1 ? 3 : 2));
 
   wrefresh(window);
