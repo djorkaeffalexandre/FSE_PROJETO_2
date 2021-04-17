@@ -114,7 +114,7 @@ void store_state_update(State state) {
     _state = state;
   }
 
-  if (state.alarm != _state.alarm && state.alarm == 1) {
+  if (state.alarm == 1) {
     state_entry_handler(0);
   }
 }
