@@ -76,15 +76,15 @@ void print_data(Data data) {
 	wattroff(window, COLOR_PAIR(data.state.lamp4 == 1 ? 3 : 2));
 
 	wattron(window, COLOR_PAIR(data.state.ac1 == 1 ? 3 : 2));
-	mvwprintw(window, 6, 15, data.state.ac1 == 1 ? "ON " : "OFF");
+	mvwprintw(window, 6, 17, data.state.ac1 == 1 ? "ON " : "OFF");
 	wattroff(window, COLOR_PAIR(data.state.ac1 == 1 ? 3 : 2));
 
 	wattron(window, COLOR_PAIR(data.state.ac2 == 1 ? 3 : 2));
-	mvwprintw(window, 7, 15, data.state.ac2 == 1 ? "ON " : "OFF");
+	mvwprintw(window, 7, 17, data.state.ac2 == 1 ? "ON " : "OFF");
 	wattroff(window, COLOR_PAIR(data.state.ac2 == 1 ? 3 : 2));
 
 	wattron(window, COLOR_PAIR(data.state.alarm == 1 ? 3 : 2));
-	mvwprintw(window, 8, 16, data.state.alarm == 1 ? "ON " : "OFF");
+	mvwprintw(window, 8, 17, data.state.alarm == 1 ? "ON " : "OFF");
 	wattroff(window, COLOR_PAIR(data.state.alarm == 1 ? 3 : 2));
 
 	wattron(window, COLOR_PAIR(1));
