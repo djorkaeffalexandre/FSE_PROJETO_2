@@ -23,10 +23,7 @@ Data current_data() {
 
 void* app_handler() {
   while (1) {
-    // Bme280 bme280 = request_sensor();
-    Bme280 bme280;
-    bme280.temperature = 0;
-    bme280.humidity = 0;
+    Bme280 bme280 = request_sensor();
 
     _data.bme280 = bme280;
 
