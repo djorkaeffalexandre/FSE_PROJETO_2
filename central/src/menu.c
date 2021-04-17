@@ -8,11 +8,10 @@
 #include "state.h"
 #include "csv.h"
 
-#define WIDTH 40
+#define WIDTH 80
 #define HEIGHT 17
 
 WINDOW *window;
-WINDOW *window2;
 
 char *options[] = {
 	"TOGGLE LAMP 1:",
@@ -161,15 +160,12 @@ void* menu_handler() {
      
 	window = newwin(HEIGHT, WIDTH, starty, startx);
 	keypad(window, TRUE);
-
-	window2 = newwin(HEIGHT, WIDTH, 42, 3);
 	refresh();
 
 	state_init();
  
 	do {
 		print_menu(window, highlight);
-		print_menu(window2, highlight);
 		c = wgetch(window);
 
 		switch(c) {
