@@ -65,7 +65,7 @@ int send_command(int item, int status) {
 
   int socketid = socket(AF_INET, SOCK_STREAM, 0);
   if (socketid == -1) {
-    char *message = "ERROR: Could not create a socket!";
+    char *message = "ERROR: Você deve inicializar o sistema distribuído!";
     quit_handler(message);
   }
 
@@ -74,7 +74,7 @@ int send_command(int item, int status) {
   client.sin_port = htons(SERVER_DISTRIBUTED_PORT);
 
   if (connect(socketid, (struct sockaddr*) &client, sizeof(client)) < 0) {
-    char *message = "ERROR: Connection failed!";
+    char *message = "ERROR: Você deve inicializar o sistema distribuído!";
     quit_handler(message);
   }
 
@@ -82,14 +82,14 @@ int send_command(int item, int status) {
   snprintf(buf, 6, "%d %d %d", 1, item, status);
   int size = strlen(buf);
   if (send(socketid, buf, size, 0) != size) {
-		char *message = "ERROR: Send failed!";
+		char *message = "ERROR: Você deve inicializar o sistema distribuído!";
     quit_handler(message);
   }
 
   char buffer[16];
   int size_rec = recv(socketid, buffer, 16, 0);
   if (size_rec < 0) {
-    char *message = "ERROR: Recv failed!";
+    char *message = "ERROR: Você deve inicializar o sistema distribuído!";
     quit_handler(message);
   }
 
