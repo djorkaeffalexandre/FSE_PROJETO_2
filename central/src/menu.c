@@ -58,24 +58,6 @@ void clear_menu(WINDOW *window_param) {
 	delwin(window_param); 
 }
 
-void* clear_connected() {
-	sleep(3);
-	mvwprintw(window, 1, 2, "              ");
-	wrefresh(window);
-	return NULL;
-}
-
-void print_not_connected() {
-	wattron(window, COLOR_PAIR(2));
-	mvwprintw(window, 1, 2, "CAN'T CONNECT");
-	wattron(window, COLOR_PAIR(2));
-	wrefresh(window);
-
-	pthread_t clear;
-	pthread_create(&clear, NULL, clear_connected, NULL);
-	pthread_join(clear, NULL);
-}
-
 void print_data(Data data) {
 	wattron(window, COLOR_PAIR(data.state.lamp1 == 1 ? 3 : 2));
 	mvwprintw(window, 2, 17, data.state.lamp1 == 1 ? "ON " : "OFF");
@@ -224,7 +206,8 @@ void* menu_handler() {
 				store_state_update(state);
 
 				if (option == 8) {
-					quit_handler();
+					char *message = "Exiting...";
+					quit_handler(message);
 				}
 
 				break;

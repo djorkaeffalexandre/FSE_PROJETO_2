@@ -3,10 +3,15 @@
 #include <unistd.h>
 #include <signal.h>
 #include <ncurses.h>
+#include <string.h>
 
-void quit_handler() {
+void quit_handler(char *message) {
   refresh();
   endwin();
+  int len = strlen(message);
+  if (len > 0) {
+    printf("%s\n", message);
+  }
   exit(0);
 }
 

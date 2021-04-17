@@ -11,7 +11,6 @@
 #include <quit.h>
 #include <alarm.h>
 #include "server.h"
-#include <menu.h>
 
 #define SERVER_DISTRIBUTED_IP "192.168.0.52"
 #define SERVER_DISTRIBUTED_PORT 10112
@@ -31,8 +30,8 @@ void* recv_message() {
 	bind(serverid, (struct sockaddr*) &server, sizeof(server));
 
 	if (listen(serverid, 10) == -1) {
-		printf("ERROR");
-		quit_handler();
+    char *message = "ERROR: Listening messages..";
+		quit_handler(message);
 	}
 
   while (1) {
@@ -43,8 +42,8 @@ void* recv_message() {
 	  int size = recv(clientid, buffer, 16, 0);
 
     if (size < 0) {
-      printf("ERROR");
-      quit_handler();
+      char *message = "ERROR: Message received with len less than expected..";
+      quit_handler(message);
     }
     
     buffer[15] = '\0';
@@ -66,8 +65,8 @@ int send_command(int item, int status) {
 
   int socketid = socket(AF_INET, SOCK_STREAM, 0);
   if (socketid == -1) {
-    print_not_connected();
-    return 1;
+    char *message = "ERROR: Could not create a socket!";
+    quit_handler(message);
   }
 
   client.sin_family = AF_INET;
@@ -75,25 +74,23 @@ int send_command(int item, int status) {
   client.sin_port = htons(SERVER_DISTRIBUTED_PORT);
 
   if (connect(socketid, (struct sockaddr*) &client, sizeof(client)) < 0) {
-    print_not_connected();
-    return 1;
+    char *message = "ERROR: Connection failed!";
+    quit_handler(message);
   }
 
   char buf[6];
   snprintf(buf, 6, "%d %d %d", 1, item, status);
   int size = strlen(buf);
   if (send(socketid, buf, size, 0) != size) {
-		print_not_connected();
-    close(socketid);
-    return 1;
+		char *message = "ERROR: Send failed!";
+    quit_handler(message);
   }
 
   char buffer[16];
   int size_rec = recv(socketid, buffer, 16, 0);
   if (size_rec < 0) {
-    print_not_connected();
-    close(socketid);
-    return 1;
+    char *message = "ERROR: Recv failed!";
+    quit_handler(message);
   }
 
   buffer[15] = '\0';
