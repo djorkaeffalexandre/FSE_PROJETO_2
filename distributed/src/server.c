@@ -51,6 +51,7 @@ void* server_handler() {
     sscanf(buffer, "%d", &command);
     // Ligar/Desligar GPIO
     if (command == 1) {
+      printf("Recebida requisição de alteração...\n");
       int item;
       int status;
       sscanf(buffer, "%d %d %d", &command, &item, &status);
@@ -58,16 +59,19 @@ void* server_handler() {
       char buf[2];
       snprintf(buf, 2, "%d", 1);
       int size = strlen(buf);
+      printf("Enviando resultado de alteração...\n");
       if (send(clientid, buf, size, 0) != size) {
         printf("Error: Send failed\n");
       }
     }
     // Leitura Sensor BME280
     if (command == 2) {
+      printf("Recebida requisição de dados do sensor BME280...\n");
       char buf[16];
       struct bme280_data data = bme280_read();
       snprintf(buf, 16, "%d %4.2f %4.2f", 2, data.temperature, data.humidity);
       int size = strlen(buf);
+      printf("Enviando dados do sensor BME280..\n");
       if (send(clientid, buf, size, 0) != size) {
         printf("Error: Send failed\n");
       }

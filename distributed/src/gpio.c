@@ -13,41 +13,49 @@ void toggle(int item, int status) {
 
 void handle_pres1(void) {
   char* message = "1";
+  printf("Alteração em: Sensor de Presença 01 (Sala)...\n");
   server_send(message);
 }
 
 void handle_pres2(void) {
   char* message = "2";
+  printf("Alteração em: Sensor de Presença 02 (Cozinha)...\n");
   server_send(message);
 }
 
 void handle_abr1(void) {
   char* message = "3";
+  printf("Alteração em: Sensor Abertura 01 (Porta Cozinha)...\n");
   server_send(message);
 }
 
 void handle_abr2(void) {
   char* message = "4";
+  printf("Alteração em: Sensor Abertura 02 (Janela Cozinha)...\n");
   server_send(message);
 }
 
 void handle_abr3(void) {
   char* message = "5";
+  printf("Alteração em: Sensor Abertura 03 (Porta Sala)...\n");
   server_send(message);
 }
 
 void handle_abr4(void) {
   char* message = "6";
+  printf("Alteração em: Sensor Abertura 04 (Janela Sala)...\n");
   server_send(message);
 }
 
 void handle_abr5(void) {
   char* message = "7";
+  printf("Alteração em: Sensor Abertura 05 (Janela Quarto 01)...\n");
   server_send(message);
 }
 
 void handle_abr6(void) {
   char* message = "8";
+  printf("Alteração em: Sensor Abertura 06 (Janela Quarto 02)...\n");
   server_send(message);
 }
 

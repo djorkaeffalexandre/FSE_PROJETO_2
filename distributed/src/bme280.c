@@ -1666,8 +1666,12 @@ struct bme280_data stream_sensor_data(struct bme280_dev *dev) {
     dev->delay_us(100000, dev->intf_ptr);
     rslt = bme280_get_sensor_data(BME280_TEMP | BME280_HUM, &data, dev);
     if (rslt != BME280_OK) {
-        fprintf(stderr, "Erro ao ler dados do sensor BME280 (código: %+d).\n", rslt);
-        exit(1);
+        printf("Erro ao ler dados do sensor BME280 (código: %+d)...\n");
+        struct bme280_data bme280;
+        bme280.temperature = 0;
+        bme280.humidity = 0;
+        bme280.pressure = 0;
+        return bme280;
     }
 
     return data;
@@ -1688,8 +1692,12 @@ struct bme280_data bme280_read() {
 
     rslt = bme280_start(&dev);
     if (rslt != BME280_OK) {
-        fprintf(stderr, "Erro ao inicializar BME280.\n");
-        exit(1);
+        printf("Erro ao inicializar BME280...\n");
+        struct bme280_data bme280;
+        bme280.temperature = 0;
+        bme280.humidity = 0;
+        bme280.pressure = 0;
+        return bme280;
     }
 
     return stream_sensor_data(&dev);
