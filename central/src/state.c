@@ -109,13 +109,13 @@ void store_state_update(State state) {
   if (state.ac2 != _state.ac2) {
     res = send_command(AC2, state.ac2);
   }
+  if (state.alarm != _state.alarm && state.alarm == 1) {
+    _state.alarm == 1;
+    state_entry_handler(0);
+  }
 
   if (res == 1) {
     _state = state;
-  }
-
-  if (state.alarm == 1) {
-    state_entry_handler(0);
   }
 }
 
