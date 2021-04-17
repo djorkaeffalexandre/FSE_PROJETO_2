@@ -32,8 +32,6 @@ void* app_handler() {
     state = retrieve_state_data();
     _data.state = state;
 
-    system("cd ..; omxplayer beep.mp3 > /dev/null");
-
     print_data(_data);
     usleep(SECOND);
   }

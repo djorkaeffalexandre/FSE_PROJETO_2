@@ -79,6 +79,7 @@ void state_entry_handler(int command) {
   } else {
     Data data = current_data();
     _state.playing = 0;
+    alarm_off();
     data.state = _state;
     print_data(data);
   }
@@ -89,6 +90,7 @@ void state_entry_handler(int command) {
 void store_state_update(State state) {
   if (state.alarm == 0) {
     state.playing = 0;
+    alarm_off();
   }
   if (state.alarm == 1 && (
     _entry.pres1 == 1
