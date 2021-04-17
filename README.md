@@ -1,7 +1,7 @@
 # Fundamentos de Sistemas Embarcados
 ## Projeto 2 - 2020.2
 
-![](https://i.imgur.com/jt7D40i.png)
+![](https://i.imgur.com/zeBSPU3.png)
 
 Para executar o projeto você deverá realizar o clone da pasta do projeto em ambas as placas (Sistema Central e Distribuído).
 ```shell

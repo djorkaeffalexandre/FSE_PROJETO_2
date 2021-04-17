@@ -76,6 +76,9 @@ void state_entry_handler(int command) {
     || _entry.abr6 == 1
   ) {
     alarm_handler();
+  } else {
+    _state.playing = 0;
+    print_data(_state);
   }
 
   print_entry(_entry);
