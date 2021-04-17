@@ -163,6 +163,10 @@ void* menu_handler() {
 	refresh();
 
 	state_init();
+
+	WINDOW *win = newwin(10, 10, 67, 0);
+	box(win, 0, 0);
+	refresh();
  
 	do {
 		print_menu(window, highlight);
