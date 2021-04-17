@@ -8,7 +8,7 @@
 #include "state.h"
 #include "csv.h"
 
-#define WIDTH 80
+#define WIDTH 65
 #define HEIGHT 17
 
 WINDOW *window;
