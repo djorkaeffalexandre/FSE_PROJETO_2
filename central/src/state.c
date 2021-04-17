@@ -2,6 +2,7 @@
 #include <server.h>
 #include <menu.h>
 #include <app.h>
+#include <alarm.h>
 
 #define LAMP1 0
 #define LAMP2 1
