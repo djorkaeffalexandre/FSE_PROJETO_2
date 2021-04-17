@@ -12,6 +12,7 @@
 #define HEIGHT 17
 
 WINDOW *window;
+WINDOW *window2;
 
 char *options[] = {
 	"TOGGLE LAMP 1:",
@@ -161,6 +162,10 @@ void* menu_handler() {
 	window = newwin(HEIGHT, WIDTH, starty, startx);
 	keypad(window, TRUE);
 	refresh();
+
+	window2 = newwin(HEIGHT, WIDTH, 80, startx);
+	box(window2, 0, 0);
+	wrefresh(window2);
 
 	state_init();
  
