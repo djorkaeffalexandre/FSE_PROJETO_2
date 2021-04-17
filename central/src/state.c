@@ -38,6 +38,34 @@ void state_init() {
   print_entry(_entry);
 }
 
+void state_entry_handler(int command) {
+  if (command == 1) {
+    _entry.pres1 = _entry.pres1 == 1 ? 0 : 1;
+  }
+  if (command == 2) {
+    _entry.pres2 = _entry.pres2 == 1 ? 0 : 1;
+  }
+  if (command == 3) {
+    _entry.abr1 = _entry.abr1 == 1 ? 0 : 1;
+  }
+  if (command == 4) {
+    _entry.abr2 = _entry.abr2 == 1 ? 0 : 1;
+  }
+  if (command == 5) {
+    _entry.abr3 = _entry.abr3 == 1 ? 0 : 1;
+  }
+  if (command == 6) {
+    _entry.abr4 = _entry.abr4 == 1 ? 0 : 1;
+  }
+  if (command == 7) {
+    _entry.abr5 = _entry.abr5 == 1 ? 0 : 1;
+  }
+  if (command == 8) {
+    _entry.abr6 = _entry.abr6 == 1 ? 0 : 1;
+  }
+  print_entry(_entry);
+}
+
 void store_state_update(State state) {
   if (state.alarm == 0) {
     state.playing = 0;

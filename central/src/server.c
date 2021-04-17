@@ -11,6 +11,7 @@
 #include <quit.h>
 #include <alarm.h>
 #include "server.h"
+#include <state.h>
 
 #define SERVER_DISTRIBUTED_IP "192.168.0.52"
 #define SERVER_DISTRIBUTED_PORT 10112
@@ -50,6 +51,7 @@ void* recv_message() {
 
 		int command;
 		sscanf(buffer, "%d", &command);
+    state_entry_handler(command);
     if (command == 1) {
       alarm_handler();
     }

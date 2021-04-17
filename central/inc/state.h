@@ -25,6 +25,7 @@ typedef struct {
 
 void state_init();
 void store_state_update(State state);
+void state_entry_handler(int command);
 State retrieve_state_data();
 
 #endif /* STATE_H_ */

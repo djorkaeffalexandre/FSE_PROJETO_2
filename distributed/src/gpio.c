@@ -11,43 +11,78 @@ void toggle(int item, int status) {
   digitalWrite(item, status);
 }
 
-void handle(void) {
+void handle_pres1(void) {
   char* message = "1";
+  server_send(message);
+}
+
+void handle_pres2(void) {
+  char* message = "2";
+  server_send(message);
+}
+
+void handle_abr1(void) {
+  char* message = "3";
+  server_send(message);
+}
+
+void handle_abr2(void) {
+  char* message = "4";
+  server_send(message);
+}
+
+void handle_abr3(void) {
+  char* message = "5";
+  server_send(message);
+}
+
+void handle_abr4(void) {
+  char* message = "6";
+  server_send(message);
+}
+
+void handle_abr5(void) {
+  char* message = "7";
+  server_send(message);
+}
+
+void handle_abr6(void) {
+  char* message = "8";
   server_send(message);
 }
 
 void* gpio_handler() {
   // Sensor de Presença 01 (Sala)
   pinMode(PRES1, OUTPUT);
-  wiringPiISR(PRES1, INT_EDGE_RISING, &handle);
+  wiringPiISR(PRES1, INT_EDGE_BOTH, &handle_pres1);
 
   // Sensor de Presença 02 (Cozinha)
   pinMode(PRES2, OUTPUT);
-  wiringPiISR(PRES2, INT_EDGE_RISING, &handle);
+  wiringPiISR(PRES2, INT_EDGE_BOTH, &handle_pres2);
 
   // Sensor Abertura 01 (Porta Cozinha)
   pinMode(ABR1, OUTPUT);
-  wiringPiISR(ABR1, INT_EDGE_RISING, &handle);
+  wiringPiISR(ABR1, INT_EDGE_BOTH, &handle_abr1);
 
   // Sensor Abertura 02 (Janela Cozinha)
   pinMode(ABR2, OUTPUT);
-  wiringPiISR(ABR2, INT_EDGE_RISING, &handle);
+  wiringPiISR(ABR2, INT_EDGE_BOTH, &handle_abr2);
   
   // Sensor Abertura 03 (Porta Sala)
   pinMode(ABR3, OUTPUT);
-  wiringPiISR(ABR3, INT_EDGE_RISING, &handle);
+  wiringPiISR(ABR3, INT_EDGE_BOTH, &handle_abr3);
 
   // Sensor Abertura 04 (Janela Sala)
   pinMode(ABR4, OUTPUT);
-  wiringPiISR(ABR4, INT_EDGE_RISING, &handle);
+  wiringPiISR(ABR4, INT_EDGE_BOTH, &handle_abr4);
 
   // Sensor Abertura 05 (Janela Quarto 01)
   pinMode(ABR5, OUTPUT);
-  wiringPiISR(ABR5, INT_EDGE_RISING, &handle);
+  wiringPiISR(ABR5, INT_EDGE_BOTH, &handle_abr5);
 
   // Sensor Abertura 06 (Janela Quarto 02)
   pinMode(ABR6, OUTPUT);
-  wiringPiISR(ABR6, INT_EDGE_RISING, &handle);
+  wiringPiISR(ABR6, INT_EDGE_BOTH, &handle_abr6);
 
   for(;;) {
     sleep(1);
