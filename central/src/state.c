@@ -85,6 +85,17 @@ void store_state_update(State state) {
   if (state.alarm == 0) {
     state.playing = 0;
   }
+  if (state.alarm == 1 && (
+    _entry.pres1 == 1
+    || _entry.pres2 == 1
+    || _entry.abr1 == 1
+    || _entry.abr2 == 1
+    || _entry.abr3 == 1
+    || _entry.abr4 == 1
+    || _entry.abr5 == 1
+    || _entry.abr6 == 1)) {
+    state.playing = 1;
+  }
   
   Data data = current_data();
   data.state = state;
@@ -108,10 +119,6 @@ void store_state_update(State state) {
   }
   if (state.ac2 != _state.ac2) {
     res = send_command(AC2, state.ac2);
-  }
-  if (state.alarm != _state.alarm && state.alarm == 1) {
-    _state.alarm = 1;
-    state_entry_handler(0);
   }
 
   if (res == 1) {
