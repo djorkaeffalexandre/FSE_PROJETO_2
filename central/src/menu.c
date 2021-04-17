@@ -163,15 +163,13 @@ void* menu_handler() {
 	keypad(window, TRUE);
 
 	window2 = newwin(HEIGHT, WIDTH, 42, 3);
-	box(window2, 42, 3);
-	wrefresh(window2);
-
 	refresh();
 
 	state_init();
  
 	do {
 		print_menu(window, highlight);
+		print_menu(window2, highlight);
 		c = wgetch(window);
 
 		switch(c) {
