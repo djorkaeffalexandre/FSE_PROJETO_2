@@ -106,10 +106,14 @@ int send_command(int item, int status) {
 Bme280 request_sensor() {
   struct sockaddr_in client;
 
+  Bme280 bme280;
+  bme280.temperature = 0;
+  bme280.humidity = 0;
+
   int socketid = socket(AF_INET, SOCK_STREAM, 0);
   if (socketid == -1) {
     printf("Could not create a socket!\n");
-    quit_handler();
+    return bme280;
   }
 
   client.sin_family = AF_INET;
@@ -118,7 +122,7 @@ Bme280 request_sensor() {
 
   if (connect(socketid, (struct sockaddr*) &client, sizeof(client)) < 0) {
     printf("Error: Connection failed\n");
-    quit_handler();
+    return bme280;
   }
 
   char buf[2];
@@ -126,14 +130,16 @@ Bme280 request_sensor() {
   int size = strlen(buf);
   if (send(socketid, buf, size, 0) != size) {
 		printf("Error: Send failed\n");
-    quit_handler();
+    close(socketid);
+    return bme280;
   }
 
   char buffer[16];
   int size_rec = recv(socketid, buffer, 16, 0);
   if (size_rec < 0) {
     printf("Error: Recv failed\n");
-    quit_handler();
+    close(socketid);
+    return bme280;
   }
     
   buffer[15] = '\0';
@@ -142,7 +148,6 @@ Bme280 request_sensor() {
   double temperature;
   double humidity;
   sscanf(buffer, "%d %lf %lf", &command, &temperature, &humidity);
-  Bme280 bme280;
   bme280.temperature = temperature;
   bme280.humidity = humidity;
 
