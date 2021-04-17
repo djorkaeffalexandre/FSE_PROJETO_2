@@ -161,6 +161,8 @@ void* menu_handler() {
 	window = newwin(HEIGHT, WIDTH, starty, startx);
 	keypad(window, TRUE);
 	refresh();
+
+	state_init();
  
 	do {
 		print_menu(window, highlight);
