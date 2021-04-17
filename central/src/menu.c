@@ -168,104 +168,104 @@ void* menu_handler() {
 	box(win, 0, 0);
 	refresh();
  
-	do {
-		print_menu(window, highlight);
-		c = wgetch(window);
+	// do {
+	// 	print_menu(window, highlight);
+	// 	c = wgetch(window);
 
-		switch(c) {
-			case KEY_UP:
-				if(highlight == 1)
-					highlight = n_options;
-				else
-					--highlight;
-				break;
-			case KEY_DOWN:
-				if(highlight == n_options)
-					highlight = 1;
-				else
-					++highlight;
-				break;
-			case 10:    
-				option = highlight;
+	// 	switch(c) {
+	// 		case KEY_UP:
+	// 			if(highlight == 1)
+	// 				highlight = n_options;
+	// 			else
+	// 				--highlight;
+	// 			break;
+	// 		case KEY_DOWN:
+	// 			if(highlight == n_options)
+	// 				highlight = 1;
+	// 			else
+	// 				++highlight;
+	// 			break;
+	// 		case 10:    
+	// 			option = highlight;
 
-				State state = retrieve_state_data();
+	// 			State state = retrieve_state_data();
 
-				if (option == 1) {
-					state.lamp1 = state.lamp1 == 1 ? 0 : 1;
-					char *item = "LAMP1";
-					Command command;
-					command.item = item;
-					command.state = state.lamp1;
-					write_data(command);
-				}
+	// 			if (option == 1) {
+	// 				state.lamp1 = state.lamp1 == 1 ? 0 : 1;
+	// 				char *item = "LAMP1";
+	// 				Command command;
+	// 				command.item = item;
+	// 				command.state = state.lamp1;
+	// 				write_data(command);
+	// 			}
 
-				if (option == 2) {
-					state.lamp2 = state.lamp2 == 1 ? 0 : 1;
-					char *item = "LAMP2";
-					Command command;
-					command.item = item;
-					command.state = state.lamp2;
-					write_data(command);
-				}
+	// 			if (option == 2) {
+	// 				state.lamp2 = state.lamp2 == 1 ? 0 : 1;
+	// 				char *item = "LAMP2";
+	// 				Command command;
+	// 				command.item = item;
+	// 				command.state = state.lamp2;
+	// 				write_data(command);
+	// 			}
 
-				if (option == 3) {
-					state.lamp3 = state.lamp3 == 1 ? 0 : 1;
-					char *item = "LAMP3";
-					Command command;
-					command.item = item;
-					command.state = state.lamp3;
-					write_data(command);
-				}
+	// 			if (option == 3) {
+	// 				state.lamp3 = state.lamp3 == 1 ? 0 : 1;
+	// 				char *item = "LAMP3";
+	// 				Command command;
+	// 				command.item = item;
+	// 				command.state = state.lamp3;
+	// 				write_data(command);
+	// 			}
 
-				if (option == 4) {
-					state.lamp4 = state.lamp4 == 1 ? 0 : 1;
-					char *item = "LAMP4";
-					Command command;
-					command.item = item;
-					command.state = state.lamp4;
-					write_data(command);
-				}
+	// 			if (option == 4) {
+	// 				state.lamp4 = state.lamp4 == 1 ? 0 : 1;
+	// 				char *item = "LAMP4";
+	// 				Command command;
+	// 				command.item = item;
+	// 				command.state = state.lamp4;
+	// 				write_data(command);
+	// 			}
 
-				if (option == 5) {
-					state.ac1 = state.ac1 == 1 ? 0 : 1;
-					char *item = "AC1";
-					Command command;
-					command.item = item;
-					command.state = state.ac1;
-					write_data(command);
-				}
+	// 			if (option == 5) {
+	// 				state.ac1 = state.ac1 == 1 ? 0 : 1;
+	// 				char *item = "AC1";
+	// 				Command command;
+	// 				command.item = item;
+	// 				command.state = state.ac1;
+	// 				write_data(command);
+	// 			}
 
-				if (option == 6) {
-					state.ac2 = state.ac2 == 1 ? 0 : 1;
-					char *item = "AC2";
-					Command command;
-					command.item = item;
-					command.state = state.ac2;
-					write_data(command);
-				}
+	// 			if (option == 6) {
+	// 				state.ac2 = state.ac2 == 1 ? 0 : 1;
+	// 				char *item = "AC2";
+	// 				Command command;
+	// 				command.item = item;
+	// 				command.state = state.ac2;
+	// 				write_data(command);
+	// 			}
 
-				if (option == 7) {
-					state.alarm = state.alarm == 1 ? 0 : 1;
-					char *item = "ALARM";
-					Command command;
-					command.item = item;
-					command.state = state.alarm;
-					write_data(command);
-				}
+	// 			if (option == 7) {
+	// 				state.alarm = state.alarm == 1 ? 0 : 1;
+	// 				char *item = "ALARM";
+	// 				Command command;
+	// 				command.item = item;
+	// 				command.state = state.alarm;
+	// 				write_data(command);
+	// 			}
 
-				store_state_update(state);
+	// 			store_state_update(state);
 
-				if (option == 8) {
-					char *message = "Exiting...";
-					quit_handler(message);
-				}
+	// 			if (option == 8) {
+	// 				char *message = "Exiting...";
+	// 				quit_handler(message);
+	// 			}
 
-				break;
-			default:
-				refresh();
-				break;
-		}
-	} while(1);
+	// 			break;
+	// 		default:
+	// 			refresh();
+	// 			break;
+	// 	}
+	// } while(1);
 
 	return NULL;
 }
