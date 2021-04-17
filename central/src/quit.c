@@ -15,6 +15,12 @@ void quit_handler(char *message) {
   exit(0);
 }
 
+void quit_handler_signal() {
+  refresh();
+  endwin();
+  exit(0);
+}
+
 void quit_init() {
-  signal(SIGINT, quit_handler);
+  signal(SIGINT, quit_handler_signal);
 }
