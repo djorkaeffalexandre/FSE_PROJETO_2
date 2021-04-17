@@ -8,7 +8,6 @@ int playing = 0;
 
 void* play() {
   while (playing == 1) {
-    printf("to tocando..\n");
     system("cd ..; omxplayer beep.mp3 > /dev/null");
   }
 
