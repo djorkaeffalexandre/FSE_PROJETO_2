@@ -11,5 +11,6 @@ typedef struct {
 
 void* menu_handler();
 void print_data(Data data);
+void print_entry(Entry entry);
 
 #endif /* MENU_H_ */

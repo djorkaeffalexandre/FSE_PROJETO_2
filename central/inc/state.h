@@ -12,6 +12,17 @@ typedef struct {
   int playing;
 } State;
 
+typedef struct {
+  int pres1;
+  int pres2;
+  int abr1;
+  int abr2;
+  int abr3;
+  int abr4;
+  int abr5;
+  int abr6;
+} Entry;
+
 void state_init();
 void store_state_update(State state);
 State retrieve_state_data();

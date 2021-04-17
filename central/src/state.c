@@ -11,6 +11,7 @@
 #define AC2 24
 
 State _state;
+Entry _entry;
 
 void state_init() {
   _state.lamp1 = 0;
@@ -22,9 +23,19 @@ void state_init() {
   _state.alarm = 0;
   _state.playing = 0;
 
+  _entry.pres1 = 0;
+  _entry.pres2 = 0;
+  _entry.abr1 = 0;
+  _entry.abr2 = 0;
+  _entry.abr3 = 0;
+  _entry.abr4 = 0;
+  _entry.abr5 = 0;
+  _entry.abr6 = 0;
+
   Data data = current_data();
   data.state = _state;
   print_data(data);
+  print_entry(_entry);
 }
 
 void store_state_update(State state) {

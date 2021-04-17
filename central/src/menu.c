@@ -8,19 +8,19 @@
 #include "state.h"
 #include "csv.h"
 
-#define WIDTH 50
+#define WIDTH 80
 #define HEIGHT 17
 
 WINDOW *window;
 
 char *options[] = {
-	"TOOGLE LAMP 1:",
-	"TOOGLE LAMP 2:",
-	"TOOGLE LAMP 3:",
-	"TOOGLE LAMP 4:",
-	"TOOGLE AC 1:",
-	"TOOGLE AC 2:",
-	"TOOGLE ALARM:",
+	"TOGGLE LAMP 1:",
+	"TOGGLE LAMP 2:",
+	"TOGGLE LAMP 3:",
+	"TOGGLE LAMP 4:",
+	"TOGGLE AC 1:",
+	"TOGGLE AC 2:",
+	"TOGGLE ALARM:",
 	"EXIT",
 };
 
@@ -95,6 +95,50 @@ void print_data(Data data) {
 	wattron(window, COLOR_PAIR(data.state.playing == 1 ? 3 : 2));
 	mvwprintw(window, 14, 2, "ALARM PLAYING: %s", data.state.playing == 1 ? "TRUE " : "FALSE");
 	wattroff(window, COLOR_PAIR(data.state.playing == 1 ? 3 : 2));
+
+  wrefresh(window);
+}
+
+void print_entry(Entry entry) {
+	mvwprintw(window, 2, 2, "Sensor de Presença 01 (Sala):");
+	wattron(window, COLOR_PAIR(entry.pres1 == 1 ? 3 : 2));
+	mvwprintw(window, 2, 40, entry.pres1 == 1 ? "ON " : "OFF");
+	wattroff(window, COLOR_PAIR(entry.pres1 == 1 ? 3 : 2));
+
+	mvwprintw(window, 2, 2, "Sensor de Presença 02 (Cozinha):");
+	wattron(window, COLOR_PAIR(entry.pres2 == 1 ? 3 : 2));
+	mvwprintw(window, 3, 40, entry.pres2 == 1 ? "ON " : "OFF");
+	wattroff(window, COLOR_PAIR(entry.pres2 == 1 ? 3 : 2));
+
+	mvwprintw(window, 2, 2, "Sensor Abertura 01 (Porta Cozinha):");
+	wattron(window, COLOR_PAIR(entry.abr1 == 1 ? 3 : 2));
+	mvwprintw(window, 4, 40, entry.abr1 == 1 ? "ON " : "OFF");
+	wattroff(window, COLOR_PAIR(entry.abr1 == 1 ? 3 : 2));
+
+	mvwprintw(window, 2, 2, "Sensor Abertura 02 (Janela Cozinha):");
+	wattron(window, COLOR_PAIR(entry.abr2 == 1 ? 3 : 2));
+	mvwprintw(window, 5, 40, entry.abr2 == 1 ? "ON " : "OFF");
+	wattroff(window, COLOR_PAIR(entry.abr2 == 1 ? 3 : 2));
+
+	mvwprintw(window, 2, 2, "Sensor Abertura 03 (Porta Sala):");
+	wattron(window, COLOR_PAIR(entry.abr3 == 1 ? 3 : 2));
+	mvwprintw(window, 6, 40, entry.abr3 == 1 ? "ON " : "OFF");
+	wattroff(window, COLOR_PAIR(entry.abr3 == 1 ? 3 : 2));
+
+	mvwprintw(window, 2, 2, "Sensor Abertura 04 (Janela Sala):");
+	wattron(window, COLOR_PAIR(entry.abr4 == 1 ? 3 : 2));
+	mvwprintw(window, 7, 40, entry.abr4 == 1 ? "ON " : "OFF");
+	wattroff(window, COLOR_PAIR(entry.abr4 == 1 ? 3 : 2));
+
+	mvwprintw(window, 2, 2, "Sensor Abertura 05 (Janela Quarto 01):");
+	wattron(window, COLOR_PAIR(entry.abr5 == 1 ? 3 : 2));
+	mvwprintw(window, 8, 40, entry.abr5 == 1 ? "ON " : "OFF");
+	wattroff(window, COLOR_PAIR(entry.abr5 == 1 ? 3 : 2));
+
+	mvwprintw(window, 2, 2, "Sensor Abertura 06 (Janela Quarto 02):");
+	wattron(window, COLOR_PAIR(entry.abr6 == 1 ? 3 : 2));
+	mvwprintw(window, 8, 40, entry.abr6 == 1 ? "ON " : "OFF");
+	wattroff(window, COLOR_PAIR(entry.abr6 == 1 ? 3 : 2));
 
   wrefresh(window);
 }
