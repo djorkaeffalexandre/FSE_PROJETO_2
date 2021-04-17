@@ -112,7 +112,6 @@ Bme280 request_sensor() {
 
   int socketid = socket(AF_INET, SOCK_STREAM, 0);
   if (socketid == -1) {
-    printf("Could not create a socket!\n");
     return bme280;
   }
 
@@ -121,7 +120,6 @@ Bme280 request_sensor() {
   client.sin_port = htons(SERVER_DISTRIBUTED_PORT);
 
   if (connect(socketid, (struct sockaddr*) &client, sizeof(client)) < 0) {
-    printf("Error: Connection failed\n");
     return bme280;
   }
 
@@ -129,7 +127,6 @@ Bme280 request_sensor() {
   snprintf(buf, 2, "%d", 2);
   int size = strlen(buf);
   if (send(socketid, buf, size, 0) != size) {
-		printf("Error: Send failed\n");
     close(socketid);
     return bme280;
   }
@@ -137,7 +134,6 @@ Bme280 request_sensor() {
   char buffer[16];
   int size_rec = recv(socketid, buffer, 16, 0);
   if (size_rec < 0) {
-    printf("Error: Recv failed\n");
     close(socketid);
     return bme280;
   }
