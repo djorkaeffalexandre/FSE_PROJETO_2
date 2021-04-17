@@ -77,8 +77,10 @@ void state_entry_handler(int command) {
   ) {
     alarm_handler();
   } else {
+    Data data = current_data();
     _state.playing = 0;
-    print_data(_state);
+    data.state = _state;
+    print_data(data);
   }
 
   print_entry(_entry);
