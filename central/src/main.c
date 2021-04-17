@@ -13,6 +13,7 @@ int main() {
 	quit_init();
 	state_init();
 	csv_init();
+	app_init();
 
 	pthread_t app, menu, server;
 

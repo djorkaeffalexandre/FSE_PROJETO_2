@@ -21,6 +21,10 @@ void state_init() {
   _state.ac2 = 0;
   _state.alarm = 0;
   _state.playing = 0;
+
+  Data data = current_data();
+  data.state = _state;
+  print_data(data);
 }
 
 void store_state_update(State state) {

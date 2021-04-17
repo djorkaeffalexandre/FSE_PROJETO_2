@@ -10,6 +10,13 @@
 
 Data _data;
 
+void app_init() {
+  Bme280 bme280;
+  bme280.temperature = 0;
+  bme280.humidity = 0;
+  _data.bme280 = bme280;
+}
+
 Data current_data() {
   return _data;
 }
