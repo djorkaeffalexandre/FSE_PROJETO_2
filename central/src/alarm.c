@@ -6,6 +6,15 @@
 
 int playing = 0;
 
+void* play() {
+  while (playing == 1) {
+    printf("to tocando..\n");
+    system("cd ..; omxplayer beep.mp3 > /dev/null");
+  }
+
+  return NULL;
+}
+
 void alarm_handler() {
   State state = retrieve_state_data();
 
@@ -21,13 +30,4 @@ void alarm_handler() {
 
 void alarm_off() {
   playing = 0;
-}
-
-void* play() {
-  while (playing == 1) {
-    printf("to tocando..\n");
-    system("cd ..; omxplayer beep.mp3 > /dev/null");
-  }
-
-  return NULL;
 }
