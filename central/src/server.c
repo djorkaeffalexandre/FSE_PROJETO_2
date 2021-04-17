@@ -52,9 +52,6 @@ void* recv_message() {
 		int command;
 		sscanf(buffer, "%d", &command);
     state_entry_handler(command);
-    if (command == 1) {
-      alarm_handler();
-    }
 		
 		close(clientid);
   }
