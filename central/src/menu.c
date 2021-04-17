@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
+#include <pthread.h>
 
 #include "menu.h"
 #include "quit.h"
@@ -55,6 +56,24 @@ void clear_menu(WINDOW *window_param) {
 	wborder(window_param, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');  
 	wrefresh(window_param);
 	delwin(window_param); 
+}
+
+void* clear_connected() {
+	sleep(3);
+	mvwprintw(window, 1, 2, "              ");
+	wrefresh(window);
+	return NULL;
+}
+
+void print_not_connected() {
+	wattron(window, COLOR_PAIR(2));
+	mvwprintw(window, 1, 2, "CAN'T CONNECT");
+	wattron(window, COLOR_PAIR(2));
+	wrefresh(window);
+
+	pthread_t clear;
+	pthread_create(&clear, NULL, clear_connected, NULL);
+	pthread_join(clear, NULL);
 }
 
 void print_data(Data data) {

@@ -11,6 +11,7 @@
 #include <quit.h>
 #include <alarm.h>
 #include "server.h"
+#include <menu.h>
 
 #define SERVER_DISTRIBUTED_IP "192.168.0.52"
 #define SERVER_DISTRIBUTED_PORT 10112
@@ -65,8 +66,8 @@ int send_command(int item, int status) {
 
   int socketid = socket(AF_INET, SOCK_STREAM, 0);
   if (socketid == -1) {
-    printf("Could not create a socket!\n");
-    quit_handler();
+    print_not_connected();
+    return 1;
   }
 
   client.sin_family = AF_INET;
@@ -74,23 +75,25 @@ int send_command(int item, int status) {
   client.sin_port = htons(SERVER_DISTRIBUTED_PORT);
 
   if (connect(socketid, (struct sockaddr*) &client, sizeof(client)) < 0) {
-    printf("Error: Connection failed\n");
-    quit_handler();
+    print_not_connected();
+    return 1;
   }
 
   char buf[6];
   snprintf(buf, 6, "%d %d %d", 1, item, status);
   int size = strlen(buf);
   if (send(socketid, buf, size, 0) != size) {
-		printf("Error: Send failed\n");
-    quit_handler();
+		print_not_connected();
+    close(socketid);
+    return 1;
   }
 
   char buffer[16];
   int size_rec = recv(socketid, buffer, 16, 0);
   if (size_rec < 0) {
-    printf("Error: Recv failed\n");
-    quit_handler();
+    print_not_connected();
+    close(socketid);
+    return 1;
   }
 
   buffer[15] = '\0';
