@@ -8,7 +8,7 @@
 #include "state.h"
 #include "csv.h"
 
-#define WIDTH 80
+#define WIDTH 40
 #define HEIGHT 17
 
 WINDOW *window;
@@ -163,7 +163,7 @@ void* menu_handler() {
 	keypad(window, TRUE);
 	refresh();
 
-	window2 = newwin(HEIGHT, WIDTH, 80, startx);
+	window2 = newwin(HEIGHT, WIDTH, 41, startx);
 	box(window2, 0, 0);
 	wrefresh(window2);
 
