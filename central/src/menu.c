@@ -162,8 +162,8 @@ void* menu_handler() {
 	window = newwin(HEIGHT, WIDTH, starty, startx);
 	keypad(window, TRUE);
 
-	window2 = newwin(HEIGHT, WIDTH, 41, startx);
-	box(window2, 0, 0);
+	window2 = newwin(HEIGHT, WIDTH, 42, 3);
+	box(window2, 42, 3);
 	wrefresh(window2);
 
 	refresh();
